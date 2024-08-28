@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://dx4c4lpyo8c8s"]
+
+[ext_resource type="Script" path="res://Player Alex.gd" id="1_5fqyc"]
+[ext_resource type="Texture2D" uid="uid://bxrankuj733d3" path="res://Untitled.png" id="2_dgigv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0tv46"]
+size = Vector2(50, 50)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player Alex" type="CharacterBody2D" parent="."]
+motion_mode = 1
+slide_on_ceiling = false
+script = ExtResource("1_5fqyc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player Alex"]
+position = Vector2(26, 1)
+shape = SubResource("RectangleShape2D_0tv46")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Player Alex"]
+amount = 50
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector2(-100, 0)
+spread = 11.93
+initial_velocity_min = 505.06
+initial_velocity_max = 535.36
+scale_amount_max = 10.0
+color = Color(0.386868, 0.187253, 9.62615e-08, 1)
+
+[node name="Untitled" type="Sprite2D" parent="Player Alex"]
+position = Vector2(38, 2)
+rotation = -1.5708
+scale = Vector2(0.21, 0.18)
+texture = ExtResource("2_dgigv")
+
+[node name="Camera2D" type="Camera2D" parent="."]
