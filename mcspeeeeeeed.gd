@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 # @export lets you modify it in the left "inspector" tab
 # means you can change the speed without modifying the script
-@export var max_speed: int = 300
+@export var max_speed: int = 1000
 # can use ": int" to type hint that it's an int
 # also useful to catch errors
 @export var acceleration: int = 5
