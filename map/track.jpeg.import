@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1udnlg4kqdsi"
-path="res://.godot/imported/frog.jpeg-72849091b6dec8f06d4850cab4c3371e.ctex"
+uid="uid://bpjlk3fx6wlsu"
+path="res://.godot/imported/track.jpeg-c3481347987939f44acb677ac595d982.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://frog.jpeg"
-dest_files=["res://.godot/imported/frog.jpeg-72849091b6dec8f06d4850cab4c3371e.ctex"]
+source_file="res://map/track.jpeg"
+dest_files=["res://.godot/imported/track.jpeg-c3481347987939f44acb677ac595d982.ctex"]
 
 [params]
 

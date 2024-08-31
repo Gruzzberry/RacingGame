@@ -1,0 +1,72 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkql2u8xxfjsh"]
+
+[ext_resource type="Texture2D" uid="uid://bxrankuj733d3" path="res://player/Untitled.png" id="1_7wp4x"]
+
+[sub_resource type="GDScript" id="GDScript_xj6cy"]
+script/source = "# class_name gives a name to this type of CharacterBody2D
+# So in other scripts if I want to make a new \"Player\"
+# I can use stuff like Player.new()
+# And that would make a new McSpeeeeeeeed
+class_name Player extends CharacterBody2D
+
+# @export lets you modify it in the left \"inspector\" tab
+# means you can change the speed without modifying the script
+@export var max_speed: int = 300
+# can use \": int\" to type hint that it's an int
+# also useful to catch errors
+@export var acceleration: int = 20
+@export var friction: int = 10
+
+func _physics_process(_delta):
+	look_at(get_global_mouse_position())
+	var forward_or_backward = Input.get_axis(\"ui_down\", \"ui_up\")
+	
+	# if we are not pressing anything, move our velocity towards (0,0) (x,y)
+	if forward_or_backward == 0:
+		velocity = velocity.move_toward(Vector2.ZERO, friction)
+	else: # if we are pressing, accelerate towards our transform * input * max speed
+		velocity = velocity.move_toward(transform.x * forward_or_backward * max_speed, acceleration)
+	
+	move_and_slide()
+
+func boost() -> void:
+	var old_speed = max_speed
+	var old_acceleration = acceleration
+	max_speed = max_speed * 2
+	acceleration = acceleration * 10
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0tv46"]
+size = Vector2(77, 44)
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+slide_on_ceiling = false
+script = SubResource("GDScript_xj6cy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, -0.999998)
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_0tv46")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 150
+lifetime = 3.0
+emission_shape = 1
+emission_sphere_radius = 26.86
+direction = Vector2(-100, 0)
+spread = 11.93
+gravity = Vector2(0, 0)
+initial_velocity_min = 505.06
+initial_velocity_max = 535.36
+angular_velocity_max = 320.0
+scale_amount_max = 10.0
+color = Color(0.386868, 0.187253, 9.62615e-08, 1)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0.468205, -0.732786)
+rotation = -1.5708
+scale = Vector2(0.21531, 0.179625)
+texture = ExtResource("1_7wp4x")
+
+[node name="Camera2D" type="Camera2D" parent="."]

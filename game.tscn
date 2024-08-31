@@ -1,71 +1,16 @@
 [gd_scene load_steps=6 format=3 uid="uid://dx4c4lpyo8c8s"]
 
-[ext_resource type="Texture2D" uid="uid://d1udnlg4kqdsi" path="res://frog.jpeg" id="2_73oss"]
-[ext_resource type="Texture2D" uid="uid://bxrankuj733d3" path="res://Untitled.png" id="2_jnrm8"]
-
-[sub_resource type="GDScript" id="GDScript_xj6cy"]
-script/source = "extends CharacterBody2D
-
-# @export lets you modify it in the left \"inspector\" tab
-# means you can change the speed without modifying the script
-@export var max_speed: int = 1000
-# can use \": int\" to type hint that it's an int
-# also useful to catch errors
-@export var acceleration: int = 5
-@export var friction: int = 5
-
-func _physics_process(_delta):
-	look_at(get_global_mouse_position())
-	var forward_or_backward = Input.get_axis(\"ui_down\", \"ui_up\")
-	
-	# if we are not pressing anything, move our velocity towards (0,0) (x,y)
-	if forward_or_backward == 0:
-		velocity = velocity.move_toward(Vector2.ZERO, friction)
-	else: # if we are pressing, accelerate towards our transform * input * max speed
-		velocity = velocity.move_toward(transform.x * forward_or_backward * max_speed, acceleration)
-	
-	move_and_slide()
-"
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0tv46"]
-size = Vector2(77, 44)
+[ext_resource type="PackedScene" uid="uid://dkql2u8xxfjsh" path="res://player/player.tscn" id="1_ck1rh"]
+[ext_resource type="Texture2D" uid="uid://d1udnlg4kqdsi" path="res://map/frog.jpeg" id="2_73oss"]
+[ext_resource type="PackedScene" uid="uid://psafi163ts87" path="res://map/boost_pad.tscn" id="3_f8oet"]
+[ext_resource type="Texture2D" uid="uid://bpjlk3fx6wlsu" path="res://map/track.jpeg" id="3_sg1w4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gh82q"]
 size = Vector2(100, 200)
 
 [node name="Game" type="Node2D"]
 
-[node name="McSpeeeeeeeeeed" type="CharacterBody2D" parent="."]
-motion_mode = 1
-slide_on_ceiling = false
-script = SubResource("GDScript_xj6cy")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="McSpeeeeeeeeeed"]
-position = Vector2(1.5, -0.999998)
-rotation = 3.14159
-shape = SubResource("RectangleShape2D_0tv46")
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="McSpeeeeeeeeeed"]
-amount = 150
-lifetime = 3.0
-emission_shape = 1
-emission_sphere_radius = 26.86
-direction = Vector2(-100, 0)
-spread = 11.93
-gravity = Vector2(0, 0)
-initial_velocity_min = 505.06
-initial_velocity_max = 535.36
-angular_velocity_max = 320.0
-scale_amount_max = 10.0
-color = Color(0.386868, 0.187253, 9.62615e-08, 1)
-
-[node name="Sprite" type="Sprite2D" parent="McSpeeeeeeeeeed"]
-position = Vector2(0.468205, -0.732786)
-rotation = -1.5708
-scale = Vector2(0.21531, 0.179625)
-texture = ExtResource("2_jnrm8")
-
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Player" parent="." instance=ExtResource("1_ck1rh")]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(300, 0)
@@ -77,3 +22,19 @@ shape = SubResource("RectangleShape2D_gh82q")
 position = Vector2(-8.43406e-06, 3.27826e-06)
 scale = Vector2(0.0603865, 0.0905797)
 texture = ExtResource("2_73oss")
+
+[node name="BoostPad" parent="." instance=ExtResource("3_f8oet")]
+position = Vector2(561, -10)
+
+[node name="BoostPad2" parent="." instance=ExtResource("3_f8oet")]
+position = Vector2(1188, 668)
+
+[node name="BoostPad3" parent="." instance=ExtResource("3_f8oet")]
+position = Vector2(927, 1505)
+
+[node name="Track" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(723, 235)
+scale = Vector2(4.30774, 4.31333)
+texture = ExtResource("3_sg1w4")
+metadata/_edit_lock_ = true
