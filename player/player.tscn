@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dkql2u8xxfjsh"]
+[gd_scene load_steps=6 format=3 uid="uid://dkql2u8xxfjsh"]
 
 [ext_resource type="Texture2D" uid="uid://bxrankuj733d3" path="res://player/Untitled.png" id="1_7wp4x"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_aegqk"]
+[ext_resource type="AudioStream" uid="uid://bp8gnqo4m685c" path="res://player/engine_sound.mp3" id="3_3hkd2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0tv46"]
 size = Vector2(77, 44)
@@ -10,11 +11,12 @@ size = Vector2(77, 44)
 _data = [Vector2(0.0201238, 1), 0.0, 0.0, 0, 0, Vector2(0.979876, 0.047707), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("exhaust_particles")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("exhaust_particles", "engine_sound")]
 motion_mode = 1
 slide_on_ceiling = false
 script = ExtResource("1_aegqk")
 exhaust_particles = NodePath("TrailParticles")
+engine_sound = NodePath("AudioStreamPlayer2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, -0.999998)
@@ -40,3 +42,6 @@ scale = Vector2(0.21531, 0.179625)
 texture = ExtResource("1_7wp4x")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_3hkd2")

@@ -21,6 +21,9 @@ class_name Player extends CharacterBody2D
 # but that isn't as clean
 @export var exhaust_particles: CPUParticles2D
 
+@export_category("Sounds")
+@export var engine_sound: AudioStreamPlayer2D
+
 func _physics_process(_delta):
 	look_at(get_global_mouse_position())
 	var forward_or_backward = Input.get_axis("ui_down", "ui_up")
@@ -28,10 +31,10 @@ func _physics_process(_delta):
 	# if we are not pressing anything, move our velocity towards (0,0) (x,y)
 	if forward_or_backward == 0:
 		velocity = velocity.move_toward(Vector2.ZERO, friction)
-		exhaust_particles.emitting = false
+		_engine_off()
 	else: # if we are pressing, accelerate towards our transform * input * max speed
 		velocity = velocity.move_toward(transform.x * forward_or_backward * max_speed, acceleration)
-		exhaust_particles.emitting = true
+		_engine_on()
 	
 	move_and_slide()
 
@@ -40,3 +43,12 @@ func boost() -> void:
 	var _old_acceleration = acceleration
 	max_speed = max_speed * 2
 	acceleration = acceleration * 2
+
+func _engine_on() -> void:
+	exhaust_particles.emitting = true
+	if not engine_sound.playing:
+		engine_sound.play()
+
+func _engine_off() -> void:
+	exhaust_particles.emitting = false
+	engine_sound.stop()
