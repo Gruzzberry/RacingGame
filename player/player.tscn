@@ -10,10 +10,11 @@ size = Vector2(77, 44)
 _data = [Vector2(0.0201238, 1), 0.0, 0.0, 0, 0, Vector2(0.979876, 0.047707), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("exhaust_particles")]
 motion_mode = 1
 slide_on_ceiling = false
 script = ExtResource("1_aegqk")
+exhaust_particles = NodePath("TrailParticles")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, -0.999998)
