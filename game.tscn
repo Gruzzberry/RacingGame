@@ -26,12 +26,6 @@ texture = ExtResource("2_73oss")
 [node name="BoostPad" parent="." instance=ExtResource("3_f8oet")]
 position = Vector2(561, -10)
 
-[node name="BoostPad2" parent="." instance=ExtResource("3_f8oet")]
-position = Vector2(1188, 668)
-
-[node name="BoostPad3" parent="." instance=ExtResource("3_f8oet")]
-position = Vector2(927, 1505)
-
 [node name="Track" type="Sprite2D" parent="."]
 show_behind_parent = true
 position = Vector2(723, 235)
